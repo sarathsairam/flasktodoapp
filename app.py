@@ -4,7 +4,9 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' ## 3 slashes relative path, 4 slashes absolute path
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://rrbmthbpslvucv:f6e31849001e963467a7259a82298c063819fcada95a978d95c32f23b5f53ede@ec2-174-129-255-57.compute-1.amazonaws.com:5432/d70boq7ndrdh4c'
+##'sqlite:///test.db' ## 3 slashes relative path, 4 slashes absolute path
+
 db = SQLAlchemy(app)
 
 class Todo(db.Model):
