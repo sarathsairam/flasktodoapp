@@ -1,11 +1,11 @@
 body, html {
     margin: 0;
-    font-family: 'Acme', sans-serif;
+    font-family: 'Rosario', sans-serif;
 }
 
 .content {
     margin: 0 auto;
-    width: 400px;
+    width: 700px;
 }
 
 table, td, th {
@@ -22,7 +22,7 @@ th {
 }
 
 td {
-    text-align: center;
+    text-align: left;
     padding: 5px;
 }
 
