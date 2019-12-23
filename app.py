@@ -21,7 +21,7 @@ class Todo(db.Model):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    remoteIP = request.remote_addr
+    remoteIP = request.headers['X-Forwarded-For']
     if request.method == 'POST':
         task_content = request.form['content']
         if not task_content:
