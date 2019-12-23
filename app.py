@@ -1,5 +1,5 @@
 from datetime import datetime
-from dateutil import tz
+from dateutil import *
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
