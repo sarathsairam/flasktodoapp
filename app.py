@@ -36,7 +36,7 @@ def index():
     else:
         tasks = Todo.query.order_by(Todo.date_created).all()
         return render_template("index.html", tasks = tasks,
-            currtime = datetime.now(tzlocal()).tzname(), remoteIP = request.environ['REMOTE_ADDR'])
+            currtime = datetime.now(tz.tzlocal()).tzname(), remoteIP = request.environ['REMOTE_ADDR'])
     ## return "Hello World!"
 
 @app.route('/delete/<int:id>')
