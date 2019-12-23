@@ -8,6 +8,7 @@
 <div class="content">
     <h3 style="text-align: center;">Task Master</h3>
     {% if tasks|length < 1 %}
+    <p>{{ currtime }}</p>
     <h4 style="text-align: center;">No tasks Yet. Create your ToDo tasks below!!!</h4>
     {% else %}
     <table border="1">
