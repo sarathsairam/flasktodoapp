@@ -2,6 +2,7 @@ from datetime import datetime
 from dateutil.tz import tz
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+import requests
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fjqgnilcyhahwt:8d2516abb198867ab61c6780d948a1f8522852207c5a6f827152db39e2207a36@ec2-107-20-185-16.compute-1.amazonaws.com:5432/d65m8eht79jeu1'
@@ -20,6 +21,7 @@ class Todo(db.Model):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
+    remoteIP = request.remote_addr
     if request.method == 'POST':
         task_content = request.form['content']
         if not task_content:
@@ -36,7 +38,7 @@ def index():
     else:
         tasks = Todo.query.order_by(Todo.date_created).all()
         return render_template("index.html", tasks = tasks,
-            currtime = datetime.now(tz.tzlocal()).tzname(), remoteIP = request.environ['REMOTE_ADDR'])
+            currtime = datetime.now(tz.tzlocal()).tzname(), remoteIP = remoteIP)
     ## return "Hello World!"
 
 @app.route('/delete/<int:id>')
@@ -67,6 +69,15 @@ def update(id):
             
     else:
         return render_template('update.html', task = task_to_update)
+
+def get_country(ip_address):
+    try:
+        response = requests.get("http://ip-api.com/json/{}".format(ip_address))
+        js = response.json()
+        country = js['countryCode']
+        return country
+    except Exception as e:
+        return "Unknown"
 
 if __name__ == "__main__":
     app.run(debug=True)
