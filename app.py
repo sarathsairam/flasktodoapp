@@ -35,7 +35,7 @@ def index():
 
     else:
         tasks = Todo.query.order_by(Todo.date_created).all()
-        return render_template("index.html", tasks = tasks, currtime = tz.tzlocal)
+        return render_template("index.html", tasks = tasks, currtime = datetime.now(tzlocal()).tzname())
     ## return "Hello World!"
 
 @app.route('/delete/<int:id>')
