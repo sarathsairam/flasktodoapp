@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from selenium import webdriver as wbr
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.firefox.options import Options
 import requests
 import urllib
 
@@ -31,7 +32,9 @@ def index():
     cap = DesiredCapabilities().FIREFOX
     cap["marionette"] = False
     binary = FirefoxBinary('/app/vendor/firefox/firefox')
-    brw = wbr.Firefox(firefox_binary=binary, capabilities=cap, executable_path='/app/vendor/geckodriver/geckodriver')
+    options = Options()
+    options.set_headless(headless=True)
+    brw = wbr.Firefox(firefox_options=options, firefox_binary=binary, capabilities=cap, executable_path='/app/vendor/geckodriver/geckodriver')
     urls = "http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full"
     text_table = brw.find_element_by_tag_name('table')
 
