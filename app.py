@@ -60,6 +60,7 @@ def index():
             # panchangText = text_table
     ## return "Hello World!"
 
+
 @app.route('/delete/<int:id>')
 def delete(id):
     task_to_del = Todo.query.get_or_404(id)
