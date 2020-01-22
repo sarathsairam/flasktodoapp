@@ -3,6 +3,7 @@ from dateutil.tz import tz
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from selenium import webdriver as wbr
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import requests
 import urllib
 
@@ -26,7 +27,9 @@ class Todo(db.Model):
 def index():
     # panchang = urllib.request.urlopen('http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full')
     # todayContent = panchang.read()
-    brw = wbr.Firefox(executable_path='/app/vendor/geckodriver/geckodriver')
+    cap = DesiredCapabilities().FIREFOX
+    cap["marionette"] = False
+    brw = wbr.Firefox(capabilities=cap, executable_path='/app/vendor/geckodriver/geckodriver')
     urls = "http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full"
     text_table = brw.find_element_by_tag_name('table')
 
