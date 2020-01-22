@@ -56,9 +56,8 @@ def index():
         tasks = Todo.query.order_by(Todo.date_created).all()
         return render_template("index.html", tasks = tasks,
             currtime = datetime.now(tz.tzlocal()).tzname(),
-            remoteIP = remoteIP
+            remoteIP = remoteIP)
             # panchangText = text_table
-            )
     ## return "Hello World!"
 
 @app.route('/delete/<int:id>')
