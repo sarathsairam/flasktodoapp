@@ -37,6 +37,7 @@ def index():
     brw = wbr.Firefox(firefox_options=options, firefox_binary=binary, capabilities=cap, executable_path='./vendor/geckodriver/geckodriver')
     urls = "http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full"
     text_table = brw.find_element_by_tag_name('table')
+    
     remoteIP = request.headers['X-Forwarded-For']
     if request.method == 'POST':
         task_content = request.form['content']
