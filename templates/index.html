@@ -14,7 +14,7 @@
     <p>{{ currtime }}</p>
     <br>
     <p>{{ remoteIP }}</p>
-    <p>{{ panchangToday }}</p>
+    <!-- <p>{{ panchangToday }}</p> -->
     <table border="1">
         <tr>
             <th>Task</th>
@@ -40,8 +40,10 @@
     <form action="/" method="POST">
         <input type="text" name="content" id="content">
         <input type="submit" value="Add Task">
+        <br><br>
+        <input type="button" value="Today's Panchang">
     </form>
 </div>
 
-<iframe name='iframe' id='iframe' src="http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full" scrolling="no" width="190px" height="200px" frameborder="0" style="border:skyblue;" allowTransparency="true"></iframe>
+<!-- <iframe name='iframe' id='iframe' src="http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full" scrolling="no" width="190px" height="200px" frameborder="0" style="border:skyblue;" allowTransparency="true"></iframe> -->
 {% endblock %}

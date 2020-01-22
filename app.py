@@ -22,8 +22,8 @@ class Todo(db.Model):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    panchang = urllib.request.urlopen('http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full')
-    todayContent = panchang.read()
+    # panchang = urllib.request.urlopen('http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full')
+    # todayContent = panchang.read()
     remoteIP = request.headers['X-Forwarded-For']
     if request.method == 'POST':
         task_content = request.form['content']
@@ -41,7 +41,8 @@ def index():
     else:
         tasks = Todo.query.order_by(Todo.date_created).all()
         return render_template("index.html", tasks = tasks,
-            currtime = datetime.now(tz.tzlocal()).tzname(), remoteIP = remoteIP, panchangToday = todayContent)
+            currtime = datetime.now(tz.tzlocal()).tzname(),
+            remoteIP = remoteIP)
     ## return "Hello World!"
 
 @app.route('/delete/<int:id>')
@@ -81,6 +82,13 @@ def get_country(ip_address):
         return country
     except Exception as e:
         return "Unknown"
+
+@app.route('/panchang')
+def panchang():
+    return render_template('panchang.html')
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
