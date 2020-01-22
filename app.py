@@ -26,7 +26,7 @@ class Todo(db.Model):
 def index():
     # panchang = urllib.request.urlopen('http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full')
     # todayContent = panchang.read()
-    brw = wbr.Firefox()
+    brw = wbr.Firefox(executable_path='/app/vendor/geckodriver/geckodriver')
     urls = "http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full"
     text_table = brw.find_element_by_tag_name('table')
 
