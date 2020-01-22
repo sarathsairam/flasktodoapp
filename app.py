@@ -34,7 +34,6 @@ def index():
     # display.start()
 
     cap = DesiredCapabilities.FIREFOX
-    cap['marionette'] = False
     binary = FirefoxBinary('/app/vendor/firefox/firefox')
     options = Options()
     options.set_headless(headless=True)
