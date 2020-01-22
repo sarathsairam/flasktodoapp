@@ -4,6 +4,7 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from selenium import webdriver as wbr
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 import requests
 import urllib
 
@@ -29,7 +30,8 @@ def index():
     # todayContent = panchang.read()
     cap = DesiredCapabilities().FIREFOX
     cap["marionette"] = False
-    brw = wbr.Firefox(capabilities=cap, executable_path='/app/vendor/geckodriver/geckodriver')
+    binary = FirefoxBinary('/app/vendor/firefox/firefox')
+    brw = wbr.Firefox(firefox_binary=binary, capabilities=cap, executable_path='/app/vendor/geckodriver/geckodriver')
     urls = "http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full"
     text_table = brw.find_element_by_tag_name('table')
 
