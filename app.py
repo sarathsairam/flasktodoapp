@@ -3,6 +3,7 @@ from dateutil.tz import tz
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import requests
+import urllib
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fjqgnilcyhahwt:8d2516abb198867ab61c6780d948a1f8522852207c5a6f827152db39e2207a36@ec2-107-20-185-16.compute-1.amazonaws.com:5432/d65m8eht79jeu1'
@@ -21,6 +22,8 @@ class Todo(db.Model):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
+    panchang = urllib.request.urlopen('http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full')
+    todayContent = panchang.read()
     remoteIP = request.headers['X-Forwarded-For']
     if request.method == 'POST':
         task_content = request.form['content']
