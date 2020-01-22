@@ -31,7 +31,7 @@ def index():
     # todayContent = panchang.read()
     cap = DesiredCapabilities.FIREFOX.copy()
     cap["marionette"] = True
-    binary = FirefoxBinary('./vendor/firefox/firefox')
+    binary = FirefoxBinary('./app/vendor/firefox/firefox')
     options = Options()
     options.set_headless(headless=True)
     brw = wbr.Firefox(firefox_options=options, firefox_binary=binary, capabilities=cap, executable_path='./vendor/geckodriver/geckodriver')
