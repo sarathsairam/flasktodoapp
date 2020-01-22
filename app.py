@@ -29,12 +29,12 @@ class Todo(db.Model):
 def index():
     # panchang = urllib.request.urlopen('http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full')
     # todayContent = panchang.read()
-    cap = DesiredCapabilities().FIREFOX
+    cap = DesiredCapabilities.FIREFOX.copy()
     cap["marionette"] = True
-    binary = FirefoxBinary('/app/vendor/firefox/firefox')
+    binary = FirefoxBinary('./vendor/firefox/firefox')
     options = Options()
     options.set_headless(headless=True)
-    brw = wbr.Firefox(firefox_options=options, firefox_binary=binary, capabilities=cap, executable_path='/app/vendor/firefox/firefox')
+    brw = wbr.Firefox(firefox_options=options, firefox_binary=binary, capabilities=cap, executable_path='./vendor/geckodriver/geckodriver')
     urls = "http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full"
     text_table = brw.find_element_by_tag_name('table')
 
