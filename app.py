@@ -6,6 +6,7 @@ from selenium import webdriver as wbr
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.firefox.options import Options
+from pyvirtualdisplay import Display
 import requests
 import urllib
 
@@ -29,9 +30,12 @@ class Todo(db.Model):
 def index():
     # panchang = urllib.request.urlopen('http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full')
     # todayContent = panchang.read()
+    display = Display(visible=0, size=(1024, 768))
+    display.start()
+
     cap = DesiredCapabilities.FIREFOX
     cap['marionette'] = False
-    binary = FirefoxBinary('/app/vendor/firefox/firefox')
+    binary = FirefoxBinary()
     options = Options()
     options.set_headless(headless=True)
     brw = wbr.Firefox(firefox_options=options, firefox_binary=binary, capabilities=cap, executable_path='/app/vendor/geckodriver/geckodriver')
