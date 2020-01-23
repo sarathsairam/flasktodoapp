@@ -36,6 +36,7 @@ def index():
     urls = "http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full"
     drvr.get(urls)
     panchangText = drvr.find_element_by_tag_name('table').text.replace("\n", " ")
+    types = type(panchangText)
     remoteIP = request.headers['X-Forwarded-For']
     if request.method == 'POST':
         task_content = request.form['content']
@@ -54,7 +55,8 @@ def index():
         tasks = Todo.query.order_by(Todo.date_created).all()
         return render_template("index.html", tasks = tasks,
             remoteIP = remoteIP,
-            panchangText = panchangText
+            panchangText = panchangText,
+            types = types
             )
             #            currtime = datetime.now(tz.tzlocal()).tzname(), 
     ## return "Hello World!"
