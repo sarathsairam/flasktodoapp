@@ -35,7 +35,7 @@ def index():
     drvr = wbr.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     urls = "http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full"
     drvr.get(urls)
-    text_table = drvr.find_element_by_tag_name('table').text
+    panchangText = drvr.find_element_by_tag_name('table').text
 
     remoteIP = request.headers['X-Forwarded-For']
     if request.method == 'POST':
@@ -56,7 +56,7 @@ def index():
         return render_template("index.html", tasks = tasks,
             currtime = datetime.now(tz.tzlocal()).tzname(),
             remoteIP = remoteIP,
-            panchangText = text_table)
+            panchangText = panchangText)
             # 
     ## return "Hello World!"
 
