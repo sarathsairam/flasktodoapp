@@ -3,7 +3,7 @@ from dateutil.tz import tz
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from selenium import webdriver as wbr
-import requests, os
+import requests, os, time
 import urllib
 
 app = Flask(__name__)
@@ -34,6 +34,7 @@ def index():
     drvr = wbr.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     urls = "http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full"
     drvr.get(urls)
+    time.sleep(10)
     panchangText = drvr.find_element_by_tag_name('table').text.replace("\n", " ")
     types = type(panchangText)
     remoteIP = request.headers['X-Forwarded-For']
