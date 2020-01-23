@@ -3,11 +3,7 @@ from dateutil.tz import tz
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from selenium import webdriver as wbr
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-from selenium.webdriver.firefox.options import Options
-from pyvirtualdisplay import Display
-import requests
+import requests, os
 import urllib
 
 
@@ -30,16 +26,16 @@ class Todo(db.Model):
 def index():
     # panchang = urllib.request.urlopen('http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full')
     # todayContent = panchang.read()
-    # display = Display(visible=0, size=(1024, 768))
-    # display.start()
 
-    cap = DesiredCapabilities.FIREFOX
-    binary = FirefoxBinary('/app/vendor/firefox/firefox')
-    options = Options()
-    options.set_headless(headless=True)
-    brw = wbr.Firefox(firefox_options=options, firefox_binary=binary, capabilities=cap, executable_path='/app/vendor/geckodriver/geckodriver')
+    chrome_options = wbr.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    drvr = wbr.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     urls = "http://www.mypanchang.com/mobilewidget.php?cityname=Hyderabad-AP-India&displaymode=full"
-    text_table = brw.find_element_by_tag_name('table')
+    drvr.get(urls)
+    text_table = drvr.find_element_by_tag_name('table')
 
     remoteIP = request.headers['X-Forwarded-For']
     if request.method == 'POST':
