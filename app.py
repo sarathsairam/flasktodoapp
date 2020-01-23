@@ -6,7 +6,6 @@ from selenium import webdriver as wbr
 import requests, os
 import urllib
 
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://fjqgnilcyhahwt:8d2516abb198867ab61c6780d948a1f8522852207c5a6f827152db39e2207a36@ec2-107-20-185-16.compute-1.amazonaws.com:5432/d65m8eht79jeu1'
 ##postgres_crudapp :: postgres://rrbmthbpslvucv:f6e31849001e963467a7259a82298c063819fcada95a978d95c32f23b5f53ede@ec2-174-129-255-57.compute-1.amazonaws.com:5432/d70boq7ndrdh4c
