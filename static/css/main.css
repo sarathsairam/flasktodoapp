@@ -58,9 +58,14 @@
   display: block;
 }
 
-body, html {
+body{
     margin: 0;
     font-family: 'Rosario', sans-serif;
+}
+
+html {
+  margin: 0;
+  font-family: 'Rosario', sans-serif;
 }
 
 .content {
